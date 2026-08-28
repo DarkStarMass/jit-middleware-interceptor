@@ -6,6 +6,19 @@
 
 Kein Session-Lock. Kein totes Token-Gewicht. Kein Restart-Button.
 
+## Keine GitHub-Actions, keine Playground-Runner
+
+Dieses Repository stellt **nur Quellcode** bereit. Tests und Demo laufen lokal auf deinem Rechner.
+
+- **Kein** GitHub-Actions-Workflow
+- **Kein** Codespaces- / Spark- / Playground-Setup
+- Der Demo-Operator ist ein **Mock** — null Token, null Runner-Minuten
+
+```bash
+python -m unittest discover -s tests -v
+python examples/demo.py
+```
+
 ## Drei Axiome
 
 1. **Zero-Token Edge Analysis** — Intent wird lokal gelesen, bevor eine Cloud-API angefasst wird.
@@ -24,6 +37,8 @@ python -m unittest discover -s tests -v
 ```
 
 Python 3.10+, keine Drittanbieter-Abhängigkeiten. Englische README mit API-Beispielen: [`README.md`](README.md).
+
+System-Prompt für das Downstream-LLM: [`docs/SYSTEM_INSTRUCTION.md`](docs/SYSTEM_INSTRUCTION.md).
 
 ## Kanonische Demonstration
 

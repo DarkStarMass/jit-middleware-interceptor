@@ -103,15 +103,15 @@ class JITMiddleware:
             if tool:
                 result = tool.executor(arguments)
                 return ProcessResult(
-                    output=f"\u2705 Tool Output: {result}",
+                    output=f"✅ Tool Output: {result}",
                     mode="tool",
                 )
             return ProcessResult(
-                output=f"\u274c Error: LLM requested unknown tool {tool_name}",
+                output=f"❌ Error: LLM requested unknown tool {tool_name}",
                 mode="error",
             )
 
         return ProcessResult(
-            output=f"\ud83d\udcac LLM Output: {llm_response.get('text', '')}",
+            output=f"💬 LLM Output: {llm_response.get('text', '')}",
             mode="text",
         )

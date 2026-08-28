@@ -2,9 +2,9 @@
 
 > **Simple, Clear, and Kind. Zero-Entropy Routing for Ephemeral AI Pipelines.**
 
-[![CI](https://github.com/DarkStarMass/jit-middleware-interceptor/actions/workflows/ci.yml/badge.svg)](https://github.com/DarkStarMass/jit-middleware-interceptor/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-steelblue.svg)](https://www.python.org/downloads/)
+[![No GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-disabled-lightgrey.svg)](#no-github-runners)
 
 **The Invisible Router.** A middleware that sits between a user interface and an expensive LLM API. It intercepts the raw request, performs zero-cost intent analysis locally, injects *only* the required tool schema for that turn, executes if the model asked for a tool, then lets the payload fall out of scope.
 
@@ -16,6 +16,24 @@ Client ──► Intercept ──► Analyze (local) ──► Inject JIT schema
                                                    ▼
               Clean ◄── Execute ◄── Forward payload to LLM
 ```
+
+Deutsch: [`README.de.md`](README.de.md)
+
+## No GitHub runners
+
+This repository is **source only**. Clone it, read it, run it on your own machine.
+
+- There is **no GitHub Actions workflow**
+- There is **no Codespaces / Spark / Playground config**
+- The demonstration uses a **mock LLM operator** — zero tokens billed
+- Tests are stdlib `unittest`. They do not touch the network.
+
+```bash
+python -m unittest discover -s tests -v
+python examples/demo.py
+```
+
+Intent analysis is local by design. A tool that is not required for this turn does not exist for this turn.
 
 ## Why this exists
 
@@ -30,8 +48,6 @@ JMI answers a first-principles question:
 1. **Zero-Token Edge Analysis** — intent is evaluated locally before touching heavy cloud APIs.
 2. **Ephemeral Schema Injection** — capabilities exist only for the exact turn they are needed.
 3. **Implicit Garbage Collection** — the context frame is wiped after execution. Long-term conversational memory survives. The pipeline does not deadlock.
-
-A tool that is not required for this turn does not exist for this turn.
 
 ## Install
 
@@ -86,6 +102,8 @@ Three turns, matching the original specification:
 
 The routing matrix is bilingual (EN/DE) so the published German demonstration prompts dispatch as specified. `file_system_manager` is present in the matrix but stays dormant until registered — presence in a lookup table is not activation.
 
+The archival single-file manuscript lives at [`examples/interceptor_original.py`](examples/interceptor_original.py).
+
 ## Architecture
 
 | Layer | Class | Role |
@@ -122,7 +140,7 @@ Mode B was truncated in the source manuscript after Mode A. It is completed in t
 python -m unittest discover -s tests -v
 ```
 
-The harness covers the three canonical turns, sequential non-leakage, dormant routing, unknown-tool fail-closed, and custom matrices.
+The harness covers the three canonical turns, sequential non-leakage, dormant routing, unknown-tool fail-closed, and custom matrices. Run them locally. They are not executed on GitHub.
 
 ## License
 
